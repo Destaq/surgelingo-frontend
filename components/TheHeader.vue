@@ -23,11 +23,7 @@
           md:mb-0
         "
       >
-        <img
-          src="/logo_transparent.svg"
-          class="w-8"
-          viewBox="0 0 24 24"
-        />
+        <img src="/logo_transparent.svg" class="w-6" viewBox="0 0 24 24" />
         <span class="ml-3 text-xl">SurgeLingo</span>
       </NuxtLink>
       <nav
@@ -45,25 +41,69 @@
       >
         <div v-if="$auth.loggedIn">
           <NuxtLink to="/write" class="mr-5 hover:text-gray-900"
-            >Write a Post</NuxtLink
+            >Write Post</NuxtLink
+          >
+          <NuxtLink to="/search" class="mr-5 hover:text-gray-900"
+            >Search Posts</NuxtLink
           >
           <NuxtLink to="/top-posts" class="mr-5 hover:text-gray-900"
             >Top Posts</NuxtLink
           >
         </div>
       </nav>
-      <NuxtLink
-        to="/register"
-        class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24"
-      >
-        Sign Up
-      </NuxtLink>
-      <NuxtLink
-        to="/login"
-        class="md:ml-4 inline-flex items-center btn btn-outline min-h-0 h-8 w-24"
-      >
-        Log In
-      </NuxtLink>
+      <div v-if="!$auth.loggedIn">
+        <NuxtLink
+          to="/register"
+          class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24"
+        >
+          Sign Up
+        </NuxtLink>
+        <NuxtLink
+          to="/login"
+          class="
+            md:ml-4
+            inline-flex
+            items-center
+            btn btn-outline
+            min-h-0
+            h-8
+            w-24
+          "
+        >
+          Log In
+        </NuxtLink>
+      </div>
+      <div class="dropdown dropdown-end mt-4 md:mt-0" v-else>
+        <div class="avatar placeholder cursor-pointer" tabindex="0">
+          <!-- change settings -->
+          <div
+            class="bg-neutral-focus text-neutral-content rounded-full w-8 h-8"
+          >
+            <span>{{ $auth.user[0].toUpperCase() }}</span>
+          </div>
+        </div>
+        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+          <li>
+            <NuxtLink to="/profile" class="text-sm">Profile</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/settings" class="text-sm">Settings</NuxtLink>
+          </li>
+          <li class="text-sm text-red-700 cursor-pointer hover:bg-gray-200 rounded-lg" @click="logoutUser">
+            <span>Sign Out</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  methods: {
+    logoutUser() {
+      this.$auth.logout()
+    }
+  },
+}
+</script>

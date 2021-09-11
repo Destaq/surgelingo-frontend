@@ -1,5 +1,5 @@
 <template>
-  <div v-if="$auth.isLoggedIn">Home Page</div>
+  <div v-if="$auth.loggedIn">Home Page</div>
   <div v-else>
     <!-- Landing Page -->
     <div>
@@ -369,7 +369,7 @@
                 <img
                   alt="..."
                   class="max-w-full rounded-lg shadow-lg"
-                  src="https://images.unsplash.com/photo-1555212697-194d092e3b8f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
+                  src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
                 />
               </div>
               <div class="w-full md:w-5/12 ml-auto mr-auto px-4">

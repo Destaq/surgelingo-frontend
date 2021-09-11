@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "%s | SurgeLingo",
+    titleTemplate: "%s | SurgeLingo",
     htmlAttrs: {
       lang: "en"
     },
@@ -43,7 +43,7 @@ export default {
     credentials: true,
     headers: {
       common: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     }
   },
