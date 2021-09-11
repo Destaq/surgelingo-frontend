@@ -36,7 +36,7 @@
             d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
           ></path>
         </svg>
-        <span class="ml-3 text-xl">SurgeLingo</span>
+        <span class="ml-3 text-xl">SurgeLingo {{ $auth.loggedIn }}</span>
       </a>
       <nav
         class="
@@ -54,10 +54,11 @@
         <NuxtLink to="/write" class="mr-5 hover:text-gray-900">Write a Post</NuxtLink>
         <NuxtLink to="/top-posts" class="mr-5 hover:text-gray-900">Top Posts</NuxtLink>
       </nav>
-      <button class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24">
+      <NuxtLink to="/register" class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24">
         Sign Up
-      </button>
-      <button
+      </NuxtLink>
+      <NuxtLink
+        to="/login"
         class="
           ml-4
           inline-flex
@@ -70,7 +71,7 @@
         "
       >
         Log In
-      </button>
+      </NuxtLink>
     </div>
   </header>
 </template>
