@@ -11,7 +11,8 @@
         items-center
       "
     >
-      <a
+      <NuxtLink
+        to="/"
         class="
           flex
           title-font
@@ -22,53 +23,44 @@
           md:mb-0
         "
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+        <img
+          src="/logo_transparent.svg"
+          class="w-8"
           viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-          ></path>
-        </svg>
-        <span class="ml-3 text-xl">SurgeLingo {{ $auth.loggedIn }}</span>
-      </a>
+        />
+        <span class="ml-3 text-xl">SurgeLingo</span>
+      </NuxtLink>
       <nav
         class="
           md:mr-auto
           md:ml-4
           md:py-1
           md:pl-4
-          md:border-l md:border-gray-400
           flex flex-wrap
           items-center
           text-base
           justify-center
         "
+        :class="$auth.loggedIn ? 'md:border-l md:border-gray-400' : ''"
       >
-        <NuxtLink to="/write" class="mr-5 hover:text-gray-900">Write a Post</NuxtLink>
-        <NuxtLink to="/top-posts" class="mr-5 hover:text-gray-900">Top Posts</NuxtLink>
+        <div v-if="$auth.loggedIn">
+          <NuxtLink to="/write" class="mr-5 hover:text-gray-900"
+            >Write a Post</NuxtLink
+          >
+          <NuxtLink to="/top-posts" class="mr-5 hover:text-gray-900"
+            >Top Posts</NuxtLink
+          >
+        </div>
       </nav>
-      <NuxtLink to="/register" class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24">
+      <NuxtLink
+        to="/register"
+        class="inline-flex py-0 items-center btn btn-primary min-h-0 h-8 w-24"
+      >
         Sign Up
       </NuxtLink>
       <NuxtLink
         to="/login"
-        class="
-          ml-4
-          inline-flex
-          items-center
-          btn
-          btn-outline
-          min-h-0
-          h-8
-          w-24
-        "
+        class="md:ml-4 inline-flex items-center btn btn-outline min-h-0 h-8 w-24"
       >
         Log In
       </NuxtLink>

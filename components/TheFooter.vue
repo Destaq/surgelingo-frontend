@@ -50,7 +50,7 @@
       </div>
     </div>
     <div>
-      <p>Copyright  © 2021 - All right reserved Simon Ilincev</p>
+      <p>Copyright  © 2021 - All right reserved SurgeLingo</p>
     </div>
   </div>
 </template>
