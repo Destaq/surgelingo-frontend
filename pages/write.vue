@@ -25,16 +25,9 @@
           v-model="language"
         >
           <option disabled="disabled" selected="selected">Language</option>
-          <!-- include 15 most popular world languages -->
-          <option value="zh">Chinese</option>
           <option value="en">English</option>
           <option value="fr">French</option>
           <option value="de">German</option>
-          <option value="hi">Hindi</option>
-          <option value="ja">Japanese</option>
-          <option value="ko">Korean</option>
-          <option value="pt">Portuguese</option>
-          <option value="ru">Russian</option>
           <option value="es">Spanish</option>
         </select>
       </div>
@@ -102,9 +95,9 @@ export default {
       errorMessage: "",
     };
   },
-  head() {
+  head() { 
     return {
-      title: "Write Post",
+      title: "Write Surge",
     };
   },
   methods: {

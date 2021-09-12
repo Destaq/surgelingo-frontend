@@ -218,11 +218,11 @@ export default {
         );
       } else {
         try {
-          // await this.$axios.post("/api/auth/register", {
-          //   username: this.username,
-          //   email: this.email,
-          //   password: this.password,
-          // });
+          await this.$axios.post("/api/auth/register", {
+            username: this.username,
+            email: this.email,
+            password: this.password,
+          });
           await this.$auth.loginWith("cookie", {
             data: {
               username: this.username,

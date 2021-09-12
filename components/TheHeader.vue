@@ -1,5 +1,5 @@
 <template>
-  <header class="text-gray-600 body-font bg-base-200">
+  <header class="text-gray-600 body-font bg-base-200 border border-b shadow-lg">
     <div
       class="
         container
@@ -41,13 +41,13 @@
       >
         <div v-if="$auth.loggedIn">
           <NuxtLink to="/write" class="mr-5 hover:text-gray-900"
-            >Write Post</NuxtLink
+            >Write Surge</NuxtLink
+          >
+          <NuxtLink to="/wordbank" class="mr-5 hover:text-gray-900"
+            >Edit Wordbank</NuxtLink
           >
           <NuxtLink to="/search" class="mr-5 hover:text-gray-900"
-            >Search Posts</NuxtLink
-          >
-          <NuxtLink to="/top-posts" class="mr-5 hover:text-gray-900"
-            >Top Posts</NuxtLink
+            >Search Surges</NuxtLink
           >
         </div>
       </nav>

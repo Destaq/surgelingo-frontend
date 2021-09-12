@@ -111,8 +111,8 @@
           <div class="text-center pt-12 pb-12">
             <p>
               Don't have an account?
-              <a href="register.html" class="underline font-semibold"
-                >Register here.</a
+              <NuxtLink to="/register" class="underline font-semibold"
+                >Register here.</NuxtLink
               >
             </p>
           </div>

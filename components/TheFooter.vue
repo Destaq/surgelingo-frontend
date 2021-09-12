@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10 footer bg-base-200 text-base-content footer-center">
+  <div class="p-10 footer bg-base-200 text-base-content footer-center shadow-2xl border border-t">
     <div class="grid grid-flow-col gap-4">
       <a class="link link-hover">About us</a>
       <a class="link link-hover">Contact</a>
