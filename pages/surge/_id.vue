@@ -47,39 +47,5 @@ export default {
     this.surge = response.data.surge;
     this.author = response.data.author;
   },
-  computed: {
-    cardTranslation() {
-      switch (this.surge.language_code) {
-        case "en":
-          return "Card";
-        case "de":
-          return "Karte";
-        case "fr":
-          return "Carte";
-        case "es":
-          return "Tarjeta";
-      }
-    },
-  },
-  methods: {
-    async upvoteSurge() {
-      let tester = /[A-Za-z0-9]{12}/;
-      let id = this.$route.path.match(tester)[0];
-      if (this.$auth.loggedIn) {
-        const response = await this.$axios.post(`/api/surges/upvote?id=${id}`);
-        this.surge.upvotes = response.data.upvotes;
-      }
-    },
-    async downvoteSurge() {
-      let tester = /[A-Za-z0-9]{12}/;
-      let id = this.$route.path.match(tester)[0];
-      if (this.$auth.loggedIn) {
-        const response = await this.$axios.post(
-          `/api/surges/downvote?id=${id}`
-        );
-        this.surge.upvotes = response.data.upvotes;
-      }
-    },
-  },
 };
 </script>

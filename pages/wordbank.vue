@@ -7,11 +7,19 @@
       You can update the list of words you know here manually by:
     </p>
     <ul class="font-light list-disc ml-8 mt-1">
-      <li>Uploading a file</li>
+      <li>Typing in and submitting words</li>
       <!-- TODO -->
-      <li>Typing in and submitting words (coming soon)</li>
+      <li>Uploading a file (coming soon)</li>
       <li>Estimating the number of words you know (coming soon)</li>
     </ul>
+    <p class="font-light mt-1">If you have a high level of known vocabulary, <a href="https://github.com/hermitdave/FrequencyWords/tree/master/content/2018" class="link text-yellow-500 hover:text-yellow-700 underline">find</a> a pre-existing frequency list, format it, and paste it in.</p>
+    <label class="label label-text mt-4">Language being updated</label>
+    <select class="select select-sm select-bordered w-full" v-model="language">
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="es">Spanish</option>
+    </select>
     <hr class="my-3" />
     <div class="flex flex-col w-full">
       <div class="form-control">
@@ -61,6 +69,7 @@ export default {
   data() {
     return {
       userAddedWords: "",
+      language: "es"
     };
   },
   head() {
@@ -71,14 +80,19 @@ export default {
   middleware: "auth",
   methods: {
     async submitWords() {
-      await this.$axios.post("/api/actions/edit-wordbank", {
-        wordbank: this.userAddedWords,
-      }, {
-        headers: {
-          Authorization: this.$auth.strategy.token.get(),
-          // "Content-Type": "application/x-www-form-urlencoded"
+      await this.$axios.post(
+        "/api/actions/edit-wordbank",
+        {
+          wordbank: this.userAddedWords,
+          language_code: this.language
+        },
+        {
+          headers: {
+            Authorization: this.$auth.strategy.token.get(),
+            // "Content-Type": "application/x-www-form-urlencoded"
+          },
         }
-      });
+      );
       this.$router.push("/");
     },
   },

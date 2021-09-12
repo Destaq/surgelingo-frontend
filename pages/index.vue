@@ -1,5 +1,91 @@
 <template>
-  <div v-if="$auth.loggedIn">Home Page</div>
+  <div v-if="$auth.loggedIn">
+    <!-- animated spinner with tailwindcss -->
+    <div class="alert alert-warning mt-6">
+      <div class="flex-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="w-6 h-6 mx-2 stroke-current"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          ></path>
+        </svg>
+        <label
+          >Application results will be ordered randomly if wordbank is not
+          set!</label
+        >
+      </div>
+    </div>
+    <div class="alert mt-2">
+      <div class="flex-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#2196f3"
+          class="w-6 h-6 mx-2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <label
+          >Note: running on a 500x smaller database due to free hosting
+          constraints.</label
+        >
+      </div>
+    </div>
+
+    <div class="form-control mt-4 grid grid-cols-3 mx-auto gap-x-4 mb-8">
+      <select class="select select-bordered w-full max-w-xs" v-model="language">
+        <option disabled="disabled" value="default" selected="selected">
+          Language
+        </option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="es">Spanish</option>
+      </select>
+      <select
+        class="select select-bordered w-full max-w-xs"
+        v-model="difficulty"
+      >
+        <option disabled="disabled" value="default" selected="selected">
+          Difficulty
+        </option>
+        <option value="1.0">Only known words</option>
+        <option value="0.9">Easy</option>
+        <option value="0.8">Medium</option>
+        <option value="0.7">Difficult</option>
+        <option value="0.6">Hardcore</option>
+        <option value="0.0">Random</option>
+      </select>
+      <button class="btn-info btn" @click="fetchSurges">Submit</button>
+    </div>
+    <p v-if="surges.length === 0" class="font-semibold">
+      No results - add more words to your wordbank or increase the sentence
+      difficulty!
+    </p>
+    <SurgeCard
+      v-for="surge in surges"
+      :key="surge.route_link"
+      :surge="surge"
+      :author="surge.author"
+      class="w-full px-4 md:px-10 lg:px-28 my-2"
+    />
+    <button class="btn btn-primary mx-auto w-full mt-6" @click="loadMorePosts">
+      Load More
+    </button>
+  </div>
   <div v-else>
     <!-- Landing Page -->
     <div>
@@ -216,23 +302,31 @@
                       "
                     >
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6"
+                        class="w-6 h-6"
                         fill="none"
-                        viewBox="0 0 24 24"
                         stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
                           stroke-linecap="round"
                           stroke-linejoin="round"
                           stroke-width="2"
-                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                        ></path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        ></path>
                       </svg>
                     </div>
-                    <h6 class="text-xl font-semibold">Vast Configuration</h6>
+                    <h6 class="text-xl font-semibold">Endless Configuration</h6>
                     <p class="mt-2 mb-4 text-gray-600">
-                      Set the languages you learn, text difficulty, length, and so much more! Always have the sentence types that suit your mood best.
+                      Set the languages you learn, text difficulty, length, and
+                      so much more! Always have the sentence types that suit
+                      your mood best.
                     </p>
                   </div>
                 </div>
@@ -307,9 +401,21 @@
                 >
               </div>
               <div class="w-full md:w-7/12 mr-auto ml-auto px-4">
-                <SurgeCard :surge="sampleSurgeOne" :author="'helen_johns'" class="-rotate-3 shadow-lg border"></SurgeCard>
-                <SurgeCard :surge="sampleSurgeTwo" :author="'SurgeOfficial'" class="rotate-3 shadow-lg"></SurgeCard>
-                <SurgeCard :surge="sampleSurgeThree" :author="'Arkaz'" class="-rotate-3 shadow-lg"></SurgeCard>
+                <SurgeCard
+                  :surge="sampleSurgeOne"
+                  :author="'helen_johns'"
+                  class="-rotate-3 shadow-lg border"
+                ></SurgeCard>
+                <SurgeCard
+                  :surge="sampleSurgeTwo"
+                  :author="'SurgeOfficial'"
+                  class="rotate-3 shadow-lg"
+                ></SurgeCard>
+                <SurgeCard
+                  :surge="sampleSurgeThree"
+                  :author="'Arkaz'"
+                  class="-rotate-3 shadow-lg"
+                ></SurgeCard>
               </div>
             </div>
           </div>
@@ -624,18 +730,23 @@
                   Scientifically Backed
                 </h2>
                 <p class="text-lg leading-relaxed mt-4 mb-4 text-gray-500">
-                  Users who spent at least <span class="text-gray-200">5 mins/day</span> on SurgeLingo performed an
-                  average of <span class="text-gray-200">17% better</span> on language-learning tests than their
-                  counterparts - <span class="text-gray-200">after just one month</span>.
+                  Users who spent at least
+                  <span class="text-gray-200">5 mins/day</span> on SurgeLingo
+                  performed an average of
+                  <span class="text-gray-200">17% better</span> on
+                  language-learning tests than their counterparts -
+                  <span class="text-gray-200">after just one month</span>.
                 </p>
               </div>
             </div>
-            <hr class="w-1/2 my-10 mx-auto">
+            <hr class="w-1/2 my-10 mx-auto" />
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-3/12 px-4 text-center">
                 <p class="text-2xl leading-relaxed text-gray-100">
                   What are you waiting for?
-                  <NuxtLink to="/register" class="underline hover:text-white">Start surging!</NuxtLink>
+                  <NuxtLink to="/register" class="underline hover:text-white"
+                    >Start surging!</NuxtLink
+                  >
                 </p>
               </div>
             </div>
@@ -660,23 +771,60 @@ export default {
         time_created: "4/3/2019",
         language_code: "es",
         tags: ["cerveza"],
-        upvotes: 2
+        upvotes: 2,
       },
       sampleSurgeTwo: {
         content: "在有些国家乌鸦是不详的象征。",
         time_created: "12/12/2021",
         language_code: "zh",
         tags: ["文化", "有意思", "事实"],
-        upvotes: 7
+        upvotes: 7,
       },
       sampleSurgeThree: {
-        content: "Sagt ord och kastad sten kan inte tas tillbaka. Tomma tunnor skramlar mest.",
+        content:
+          "Sagt ord och kastad sten kan inte tas tillbaka. Tomma tunnor skramlar mest.",
         time_created: "9/4/2020",
         language_code: "se",
         tags: [],
-        upvotes: 12
+        upvotes: 12,
       },
+      surges: [],
+      difficulty: "0.8",
+      language: "es",
+    };
+  },
+  methods: {
+    async fetchSurges() {
+      const response = await this.$axios.get(
+        `/api/surges/return-personalized?language_code=${this.language}&difficulty=${this.difficulty}`,
+        {
+          headers: {
+            Authorization: this.$auth.strategy.token.get(),
+          },
+        }
+      );
+      this.surges = response.data.surges;
+    },
+    async loadMorePosts() {
+      const response = await this.$axios.get(
+        `/api/surges/return-personalized?language_code=${
+          this.language
+        }&difficulty=${this.difficulty}&alreadyShown=${this.surges.map(
+          (el) => el.route_link
+        )}`,
+        {
+          headers: {
+            Authorization: this.$auth.strategy.token.get(),
+          },
+        }
+      );
+      this.surges.push(...response.data.surges);
+    },
+  },
+  async fetch() {
+    if (this.$auth.loggedIn) {
+      await this.fetchSurges();
     }
-  }
+  },
 };
 </script>
