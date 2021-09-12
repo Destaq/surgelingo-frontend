@@ -60,13 +60,13 @@
       <h2 class="text-md font-normal mx-auto relative w-full mb-4">
         <span class="mr-3"
           >By
-          <NuxtLink :to="'/users/' + author" class="font-semibold underline">{{
+          <NuxtLink :to="'/user/' + author" class="font-semibold underline">{{
             author
           }}</NuxtLink></span
         >
         <span
           class="mx-0.5 text-yellow-500 font-light"
-          v-for="tag in surge.tags"
+          v-for="tag in surge.tags.filter( item => item !== '' )"
           :key="tag"
           >#{{ tag }}</span
         >
@@ -155,6 +155,8 @@ export default {
             },
           }
         );
+        this.surge.knownLemmas.fill(true);
+        this.$forceUpdate();
       }
     },
     async updateUserKnowledge(newWord, indexLoc) {

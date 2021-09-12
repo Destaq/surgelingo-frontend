@@ -43,7 +43,11 @@ export default {
       id = "000000000000"; // impossible id
     }
 
-    const response = await this.$axios.get(`/api/surges/get?id=${id}`);
+    const response = await this.$axios.get(`/api/surges/get?id=${id}`, {
+      headers: {
+        Authorization: this.$auth.strategy.token.get()
+      }
+    });
     this.surge = response.data.surge;
     this.author = response.data.author;
   },
