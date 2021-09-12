@@ -119,7 +119,7 @@
                         />
                       </svg>
                     </div>
-                    <h6 class="text-xl font-semibold">10000s of Sentences</h6>
+                    <h6 class="text-xl font-semibold">100000s of Sentences</h6>
                     <p class="mt-2 mb-4 text-gray-600">
                       Your feed will never be empty - there will always be new
                       sentences to learn with.
@@ -230,17 +230,16 @@
                         />
                       </svg>
                     </div>
-                    <h6 class="text-xl font-semibold">Free Forever</h6>
+                    <h6 class="text-xl font-semibold">Vast Configuration</h6>
                     <p class="mt-2 mb-4 text-gray-600">
-                      We believe you shouldn't have to spend a penny to learn a
-                      language. Unlimited sentences, forever.
+                      Set the languages you learn, text difficulty, length, and so much more! Always have the sentence types that suit your mood best.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flex flex-wrap items-center mt-28">
-              <div class="w-full md:w-5/12 px-4 mr-auto ml-auto">
+              <div class="w-1/2 md:w-5/12 px-4 mr-auto ml-auto">
                 <div
                   class="
                     text-gray-600
@@ -307,28 +306,10 @@
                   >Sign me up!</NuxtLink
                 >
               </div>
-              <div class="w-full md:w-4/12 px-4 mr-auto ml-auto">
-                <div class="card shadow-lg bg-white -my-2 -rotate-3 border">
-                  <div class="card-body">
-                    <h2 class="card-title">Español - Tarjeta #21</h2>
-                    <p>Me gustaría una cerveza.</p>
-                  </div>
-                </div>
-                <div class="card shadow-lg bg-white -my-2 rotate-3 border">
-                  <div class="card-body">
-                    <h2 class="card-title">中文 - 第324卡</h2>
-                    <p>在有些国家乌鸦是不详的象征。</p>
-                  </div>
-                </div>
-                <div class="card shadow-lg bg-white -rotate-3 border">
-                  <div class="card-body">
-                    <h2 class="card-title">Svenska - Kort #523</h2>
-                    <p>
-                      Det är bara genom att uppleva verklig fattigdom som vi kan
-                      lyfta fram de fattiga.
-                    </p>
-                  </div>
-                </div>
+              <div class="w-full md:w-7/12 mr-auto ml-auto px-4">
+                <SurgeCard :surge="sampleSurgeOne" :author="'helen_johns'" class="-rotate-3 shadow-lg border"></SurgeCard>
+                <SurgeCard :surge="sampleSurgeTwo" :author="'SurgeOfficial'" class="rotate-3 shadow-lg"></SurgeCard>
+                <SurgeCard :surge="sampleSurgeThree" :author="'Arkaz'" class="-rotate-3 shadow-lg"></SurgeCard>
               </div>
             </div>
           </div>
@@ -672,5 +653,30 @@ export default {
       title: "Language Learning through  Microposts ",
     };
   },
+  data() {
+    return {
+      sampleSurgeOne: {
+        content: "Me gustaría una cerveza.",
+        time_created: "4/3/2019",
+        language_code: "es",
+        tags: ["cerveza"],
+        upvotes: 2
+      },
+      sampleSurgeTwo: {
+        content: "在有些国家乌鸦是不详的象征。",
+        time_created: "12/12/2021",
+        language_code: "zh",
+        tags: ["文化", "有意思", "事实"],
+        upvotes: 7
+      },
+      sampleSurgeThree: {
+        content: "Sagt ord och kastad sten kan inte tas tillbaka. Tomma tunnor skramlar mest.",
+        time_created: "9/4/2020",
+        language_code: "se",
+        tags: [],
+        upvotes: 12
+      },
+    }
+  }
 };
 </script>
