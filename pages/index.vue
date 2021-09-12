@@ -82,7 +82,7 @@
       :author="surge.author"
       class="w-full px-4 md:px-10 lg:px-28 my-2"
     />
-    <button class="btn btn-primary mx-auto w-full mt-6" @click="loadMorePosts">
+    <button class="btn btn-primary mx-auto w-full mt-6" @click="loadMorePosts" v-if="surges.length > 0">
       Load More
     </button>
   </div>

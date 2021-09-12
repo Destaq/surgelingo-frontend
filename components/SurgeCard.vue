@@ -74,10 +74,10 @@
           {{ surge.language_code }}
         </div>
       </h2>
-      <p class="min-h-6 w-96" v-if="!surge.knownLemmas">
+      <p class="min-h-6 md:w-96md:" v-if="!surge.knownLemmas">
         {{ surge.content.charAt(0).toUpperCase() + surge.content.slice(1) }}
       </p>
-      <p class="min-h-6 w-96" v-else>
+      <p class="min-h-6 md:w-96" v-else>
         <!-- Highlighting support, note we are already splitting by words -->
         <span
           v-for="(lemma, index) in surge.knownLemmas"
@@ -95,12 +95,12 @@
         </span>
       </p>
       <hr class="w-full mx-auto my-3" />
-      <div class="grid grid-cols-3">
-        <p class="text-gray-600 my-auto">
+      <div class="grid grid-cols-2 md:grid-cols-3">
+        <p class="text-gray-600 my-auto hidden md:block">
           {{ new Date(surge.time_created).toLocaleDateString() }}
         </p>
         <button class="btn btn-success btn-sm" @click="addSurgeStemtoDB">
-          Mark Known
+          Mark&nbsp;<span class="hidden md:inline">as known</span>
         </button>
         <button
           class="
