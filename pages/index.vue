@@ -69,7 +69,7 @@
         <option value="0.6">Hardcore</option>
         <option value="0.0">Random</option>
       </select>
-      <button class="btn-info btn" @click="fetchSurges">Submit</button>
+      <button class="btn-info btn" @click="fetchSurges">Search</button>
     </div>
     <p v-if="surges.length === 0" class="font-semibold">
       No results - add more words to your wordbank or increase the sentence

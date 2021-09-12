@@ -44,7 +44,7 @@
             >Write Surge</NuxtLink
           >
           <NuxtLink to="/wordbank" class="mr-5 hover:text-gray-900"
-            >Edit Wordbank</NuxtLink
+            >Update Wordbank</NuxtLink
           >
           <NuxtLink to="/search" class="mr-5 hover:text-gray-900"
             >Search Surges</NuxtLink

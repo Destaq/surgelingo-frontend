@@ -1,69 +1,62 @@
-# frontend
+# surgelingo-frontend
+This is the frontend of my submission for the 48-hour [Develop to Disrupt 2021 hackathon](https://develop-to-disrupt.devpost.com/), built with Nuxt.js. You can view the backend [here](https://github.com/Destaq/surgelingo-backend).
 
-## Build Setup
+## About SurgeLingo
+_SurgeLingo_ addresses a fundamental issue that many language learners, especially beginner and intermediate ones, face: lack of comprehensible content. "Comprehensible content" is any form of audiovisual media that they can understand.
 
-```bash
-# install dependencies
-$ npm install
+This submission solves that problem by creating a Twitter-esque feed of sentences in the learner's target language. These sentences are taken from the [Tatoeba database](https://tatoeba.org/en/), which has millions of sentences available for download, but they can also be user-contributed.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+The radical new way in which SurgeLingo helps language learners 'surge ahead' in their studies is by:
+- Sorting the sentences based off of difficulty.
+- Allowing for different difficulties of sentences - from everything known for when the user is tired, to those where 70% of the content is known, and so on.
+- Offering advanced sentence searching - by author, tags, content, and language - so that the user can learn sentences (or 'surges') in a field they are studying for.
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+And, of course, the truly killer feature - easy wordbank updating. In order to allow the user to seamlessly discover new 'surges', the application allows for a wealth of ways for the user to demonstrate their knowledge.
 
-# generate static project
-$ npm run generate
-```
+<img src="static/surgelingo_example.png" />
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+1. On the wordbank page, users can type in words they know, or paste from a frequency list. Future searches will use these words to calculate user knowledge.
+2. An individual word in the result can be clicked to be added to the database.
+3. To work at a faster pace, or for students who study sentence 'surges' in depth, the whole content can be marked as known.
 
-## Special Directories
+As a language learner myself, this is something that I've found personally useful when I've made a [CLI tool at a smaller scale ](https://github.com/Destaq/chinese-sentence-miner) for Chinese - and the number of stars, despite how simple the project is, attest to that.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+Due to how short sentences are, the length is perfect for a user that wants to learn between meetings, at a bus stop, etc. The range of customization makes it useful for advanced and studious learners as well, since setting a goal of 'intensively reading' and analyzing N cards a day or learning cards related to some search term has learning benefits.
 
 
-### `pages`
+## Stack
+The frontend was built with Nuxt and Vue 2. TailwindCSS was used for styling, and the modules `nuxt-auth` and `nuxt-axios` were used for smooth user authentication and requests to the backend.
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+The backend was built with the Flask Python microframework, and used a PostgreSQL database to store user info, surges, and so on.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+The `nltk` Python package, a natural language processing library, was leveraged so that surge sentences and user wordbanks would be [stemmed](https://en.wikipedia.org/wiki/Stemming), a process that reduces the words inside to their root form. This allowed for support of languages that have conjugation. A number of other packages that extend Flask or allow for content generation were also used.
 
-### `plugins`
+## Running Locally
+*Steps provided are for both frontend and backend.*
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+*The example only provides English, Spanish, French, and German support, but this is extremely easy to modify for your own use case - just make sure it is one of the [fifteen languages](https://www.nltk.org/howto/stem.html) supported by SnowballStemmer.*
+1. [Install Postgres](https://postgresapp.com/documentation/cli-tools.html)
+2. [Set up Postgres CLI](https://postgresapp.com/documentation/cli-tools.html)
+3. Clone or download the [frontend](https://github.com/Destaq/surgelingo-backend) and backend
+4. Navigate to wherever you have stored the backend, and make sure you have Python 3 installed (`python3 -V`)
+    - `python3 -m pip install -r requirements.txt`
+    - `createdb surgelingo`
+    - export the following environment variables
+    ```
+    export APP_SETTINGS="config.DevelopmentConfig"
+    export DATABASE_URL="postgresql:///surgelingo"
+    export FLASK_APP=app
+    export SECRET_KEY="something-secret"
+    export JWT_SECRET_KEY="also-secret"
+    ```
+    - `flask db init`
+    - `flask db migrate`
+    - `flask db upgrade`
+    - `python3 main.py`
+    - Awesome! Backend is set up. Moving on...
+5. Install Nuxt and Vue. I'm pressed for time, a Google search should help you out here!
+6. Navigate to the folder that holds your frontend.
+    - `npm install`
+    - `npm run dev`
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+And you have the project running in your local environment! I hope it'll be as interesting and useful to you as it was fun for me building.
