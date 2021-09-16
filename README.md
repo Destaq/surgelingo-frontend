@@ -5,6 +5,8 @@ This is the frontend of my solo submission for the 48-hour [Develop to Disrupt 2
 
 You can view the winning entry page, with a video, photos, and a more detailed description [here](https://devpost.com/software/surgelingo).
 
+Proof of identity to win prize: confirmation email will be sent from tr**********ds @ gmail.com
+
 ## About SurgeLingo
 _SurgeLingo_ addresses a fundamental issue that many language learners, especially beginner and intermediate ones, face: lack of comprehensible content. "Comprehensible content" is any form of audiovisual media that they can understand.
 
