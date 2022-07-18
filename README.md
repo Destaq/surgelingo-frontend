@@ -36,12 +36,12 @@ The backend was built with the Flask Python microframework, and used a PostgreSQ
 The `nltk` Python package, a natural language processing library, was leveraged so that surge sentences and user wordbanks would be [stemmed](https://en.wikipedia.org/wiki/Stemming), a process that reduces the words inside to their root form. This allowed for support of languages that have conjugation. A number of other packages that extend Flask or allow for content generation were also used.
 
 ## Running Locally
-*Steps provided are for both frontend and backend.*
+*Steps provided are for both backend.*
 
 *The example only provides English, Spanish, French, and German support, but this is extremely easy to modify for your own use case - just make sure it is one of the [fifteen languages](https://www.nltk.org/howto/stem.html) supported by SnowballStemmer.*
 1. [Install Postgres](https://postgresapp.com/documentation/cli-tools.html)
 2. [Set up Postgres CLI](https://postgresapp.com/documentation/cli-tools.html)
-3. Clone or download the [frontend](https://github.com/Destaq/surgelingo-backend) and backend
+3. Clone or download the [backend](https://github.com/Destaq/surgelingo-backend) and frontend
 4. Navigate to wherever you have stored the backend, and make sure you have Python 3 installed (`python3 -V`)
     - `python3 -m pip install -r requirements.txt`
     - `createdb surgelingo`
